@@ -40,7 +40,7 @@ do
     mkdir -p "$antismash_out"/"${sample_name}"
     
     # Run antismash
-    echo "**********Antismash started for ${sampe_name}**********"
+    echo "********** Antismash started for ${sample_name} **********"
     antismash "$i" \
     --taxon fungi \
     --output-dir "$antismash_out"/"${sample_name}" \
@@ -48,7 +48,7 @@ do
     --cb-general --cb-knownclusters --cb-subclusters \
     --asf --pfam2go --clusterhmmer --cassis --cc-mibig --tfbs \
     --genefinding-gff3 "$annotations"/"${sample_name}"_spades_scaffolds.fasta.gff
-    echo "**********Antismash done for ${sample_name}**********"
+    echo "********** Antismash done for ${sample_name} **********"
 done
 
 # Files needed from antismash output for BigSCAPE:
