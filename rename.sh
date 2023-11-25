@@ -6,26 +6,14 @@
 #PBS -m abe
 #PBS -M ballen3@go.olemiss.edu
 
-#This file contains multiple renaming scripts!
+##### This file contains multiple renaming scripts! #######
 
+#!/bin/bash
 for file in ~/*.fastq.gz.trimmed.gz
 do
     mv "$file" "${file%.fastq.gz.trimmed.gz}.trimmed.fastq.gz"
 done
 # had to do this because spades didn't recognize ".trimmed.gz" even though it's just the trimmed fastq. So had to swap the word trimmed around
-
-
-
-# changes the current directory to the directory from which the job was submitted.
-cd "${PBS_O_WORKDIR}" || exit
-# seeing about renaming all of the files to their more simple numerical names
-for var in ~/Suilutsequencing_*/
-do
-    new=${var%/Raw_Data/*}
-    mv "$var" "${new%/Raw_Data}"
-done
-
-
 
 
 #!/bin/bash
@@ -35,7 +23,6 @@ files=( ./Suilutsequencing_* )  ##Array containing matched files, mention where 
 for i in ${files[@]}; do
     mv $i "${i#*Suilutsequencing_}"  # removes Suilutsequencing_ from Suilutsequencing_**
 done
-
 
 
 #!/bin/bash
@@ -56,6 +43,7 @@ for filename in ~/slu_raw/*_FD/Raw_Data/*.fastq.gz; do
 done
 
 
+#!/bin/bash
 # Remove a mistake "9_FD_" from the front of all of the files in the path *_FD/Raw_Data/9_FD_*.fastq.gz
 for file in *_FD/Raw_Data/9_FD_*.fastq.gz
 do
@@ -68,3 +56,19 @@ do
     fi
 done
 
+
+#!/bin/bash
+# Specify the directory containing the files
+directory="/ddn/home12/r2620/slu_fresh/antismash/as_output/"
+# Change to the specified directory
+cd "$directory" || exit
+# Rename files
+for file in /ddn/home12/r2620/slu_fresh/antismash/as_output/*; do
+  # Check if the file name contains "NODE"
+  if [[ $file == *NODE* ]]; then
+    # Rename the file by adding "0_" before "NODE"
+    new_name=$(echo "$file" | sed 's/NODE/0_NODE/')
+    mv "$file" "$new_name"
+    echo "Renamed: $file to $new_name"
+  fi
+done
