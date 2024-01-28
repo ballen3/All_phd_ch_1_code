@@ -72,3 +72,22 @@ for file in /ddn/home12/r2620/slu_fresh/antismash/as_output/*; do
     echo "Renamed: $file to $new_name"
   fi
 done
+
+
+## Similar to above, but has a variable for the number and has a directory for the oe files
+# Set the genomeID variable
+num=222.1
+# Set the output and error directory
+oe_dir=ddn/home12/r2620/slu_fresh/antismash/min_as_output/oe_renamed
+# Create the output directory if it doesn't exist
+mkdir -p "$oe_dir"
+for file in /ddn/home12/r2620/slu_fresh/antismash/min_as_output/"$num"/*; do
+  # Check if the file name contains "NODE"
+  if [[ $file == *NODE* ]]; then
+    # Rename the file by adding ""$num"_" before "NODE"
+    new_name=$(echo "$file" | sed "s/NODE/${num}_NODE/")
+    mv "$file" "$new_name"
+    echo "Renamed: $file to $new_name"
+  fi
+done
+mv /ddn/home12/r2620/slu_fresh/antismash/min_as_output/*.o* "$oe_dir"
