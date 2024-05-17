@@ -58,6 +58,7 @@ done
 
 
 #!/bin/bash
+#To Rename files in subdirectories
 # Specify the directory containing the files
 directory="/ddn/home12/r2620/slu_fresh/antismash/as_output/"
 # Change to the specified directory
@@ -73,7 +74,7 @@ for file in /ddn/home12/r2620/slu_fresh/antismash/as_output/*; do
   fi
 done
 
-
+#!/bin/bash
 ## Similar to above, but has a variable for the number and has a directory for the oe files
 # Set the genomeID variable
 num=222.1
