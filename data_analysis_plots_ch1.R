@@ -58,14 +58,14 @@ gcf_genome_df <- data.frame(Countries, genome_country_count,country_gcfs)
 unique_gcf_genome_df <- data.frame(Countries, genome_country_count,country_unique_gcfs)
 
 
-# Scatter plot with trend line
+# Scatter plot with trend line (there was confusion on this, but this is BGCs, not GCFs)
 ggplot(gcf_genome_df, aes(x = genome_country_count, y = Total_gcf_Count, color = Countries)) +
   geom_point(size=4) +  # Scatter plot
   geom_smooth(method = "lm", se = FALSE) +  # Trend line
-  labs(x = "Number of Genomes Sampled", y = "Total GCF Count", title = "Scatter Plot of GCF Counts") +
+  labs(x = "Number of Genomes Sampled", y = "Total BGC Count", title = "Scatter Plot of BGC Counts") +
   theme_minimal()
 
-# Scatter plot with trend line
+# Scatter plot with trend line (this is actually GCFs)
 ggplot(unique_gcf_genome_df, aes(x = genome_country_count, y = Total_unique_gcf_Count, color = Countries)) +
   geom_point(size=4) +  # Scatter plot
   geom_smooth(method = "lm", se = FALSE) +  # Trend line
@@ -88,15 +88,15 @@ dfa <- mydata %>%
 pa <- ggplot(dfa, aes(x = BiG.SCAPE.class, y = n, fill = BiG.SCAPE.class)) +
   geom_bar(stat = "identity") + 
   theme_minimal() +
-  geom_text(aes(label = labels), vjust = -0.2, color = "black", size = 4) +
+  geom_text(aes(label = labels), vjust = -0.2, color = "black", size = 5.5) +
   labs(y = "Number of Clusters", x = "BGC Classes") +
   theme(
     panel.background = element_blank(),
     plot.background = element_rect(fill = "transparent", colour = NA),
     axis.line = element_line(colour = "black"), # Adjust the color of axis lines
     axis.text.x = element_text(angle = 45, hjust = 1), # Rotate x-axis labels by 45 degrees
-    axis.text = element_text(colour = "black", size = 15),
-    axis.title = element_text(size = 20, colour = "black"),
+    axis.text = element_text(colour = "black", size = 25),
+    axis.title = element_text(size = 30, colour = "black"),
     legend.title = element_text(size = 15, colour = "black"),
     legend.text = element_text(size = 15, colour = "black"),
     panel.grid.major = element_blank(), # Remove major grid lines
@@ -105,7 +105,7 @@ pa <- ggplot(dfa, aes(x = BiG.SCAPE.class, y = n, fill = BiG.SCAPE.class)) +
   theme(legend.position = "none")  # Remove legend
 print(pa)
 
-# Proportion of BGCs 
+# Proportion of BGCs (BGC/genome)
 #(relative abundance of BGCs per genome in each population compared to the average abundance across all populations.)
 avg_bgc_per_genome <- (8238/258)
 #introduced
@@ -305,7 +305,7 @@ int_only_singles <- sum(introduced_only_df$num_unique_genomes == 1)
 
 
 
-
+#GCF (Unique Family) counts for each status
 # Find Family.Numbers that are found only with Status Introduced and not with Status Native
 introduced_only <- mydata %>%
   filter(Status == "Introduced") %>%
